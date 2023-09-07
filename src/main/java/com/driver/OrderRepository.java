@@ -30,19 +30,20 @@ public class OrderRepository {
         if(orderHashMap.containsKey(orderId) && partnerHashMap.containsKey(partnerId))
         {
             orderDeliveryPartnerHashMap.put(orderId,partnerId);
+            List<String> list = new ArrayList<>();
+            if(partnerOrderMap.containsKey(partnerId))
+            {
+                list = partnerOrderMap.get(partnerId);
+            }
+            if(!list.contains(orderId))
+            {
+                list.add(orderId);
+            }
+
+            partnerOrderMap.put(partnerId,list);
         }
 
-        List<String> list = new ArrayList<>();
-        if(partnerOrderMap.containsKey(partnerId))
-        {
-            list = partnerOrderMap.get(partnerId);
-        }
-        if(!list.contains(orderId))
-        {
-            list.add(orderId);
-        }
 
-        partnerOrderMap.put(partnerId,list);
 
     }
 
@@ -55,9 +56,9 @@ public class OrderRepository {
     }
 
     public Integer getOrdercountByPartnerId(String partnerId) {
-        List<String> list = new ArrayList<>();
-        list = partnerOrderMap.get(partnerId);
-        return list.size();
+
+
+        return partnerHashMap.get(partnerId).getNumberOfOrders();
     }
 
     public List<String> getOrdersByPartnerId(String partnerId) {
@@ -65,12 +66,7 @@ public class OrderRepository {
     }
 
     public List<String> getAllorders() {
-        List<String> list = new ArrayList<>();
-        for(String O : orderHashMap.keySet())
-        {
-            list.add(O);
-        }
-        return list;
+        return new ArrayList<>(orderHashMap.keySet());
     }
 
     public Integer getCountOfUnassignedOrders() {
