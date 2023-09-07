@@ -41,6 +41,8 @@ public class OrderRepository {
             }
 
             partnerOrderMap.put(partnerId,list);
+
+            partnerHashMap.get(partnerId).setNumberOfOrders(list.size());
         }
 
 
