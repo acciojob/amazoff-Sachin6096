@@ -49,7 +49,7 @@ public class OrderService {
     public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId) {
 
         String hh = time.substring(0,2);
-        String mm = time.substring(3);
+        String mm = time.substring(3,5);
         int h = Integer.parseInt(hh)*60;
         int m = Integer.parseInt(mm);
 
